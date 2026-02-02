@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Introdução ao CSS</title>
+    <link rel="stylesheet" href="assets/css/stylo.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="topo">
+        <nav>
+            <a href="#">HOME</a>
+            <a href="#">E1</a>
+            <a href="#">E2</a>
+            <a href="#">E3</a>
+            <a href="#">E4</a>
+            <a href="#">E5</a>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <button onclick="mostrarTrimestre(1)">1º Trimestre</button>
+            <button onclick="mostrarTrimestre(2)">2º Trimestre</button>
+            <button onclick="mostrarTrimestre(3)">3º Trimestre</button>
+            <button onclick="mostrarTrimestre(4)">4º Final</button>
+        </aside>
+
+        <!-- CONTEÚDO -->
+        <main class="conteudo">
+            <h1 id="titulo">Selecione um trimestre</h1>
+            <ul id="lista-temas"></ul>
+        </main>
+
+    </div>
+
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
