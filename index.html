@@ -1,3 +1,6 @@
+
+
+```html
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -7,7 +10,6 @@
 </head>
 <body>
 
-    <!-- HEADER -->
     <header class="topo">
         <nav>
             <a href="#">HOME</a>
@@ -21,7 +23,6 @@
 
     <div class="container">
 
-        <!-- SIDEBAR -->
         <aside class="sidebar">
             <button onclick="mostrarTrimestre(1)">1º Trimestre</button>
             <button onclick="mostrarTrimestre(2)">2º Trimestre</button>
@@ -29,10 +30,38 @@
             <button onclick="mostrarTrimestre(4)">4º Final</button>
         </aside>
 
-        <!-- CONTEÚDO -->
         <main class="conteudo">
             <h1 id="titulo">Selecione um trimestre</h1>
             <ul id="lista-temas"></ul>
+
+            <hr> <section class="calculadora-media">
+                <h2>Calculadora de Média do Aluno</h2>
+                <form id="form-media" onsubmit="calcularMedia(event)">
+                    <div class="campo">
+                        <label for="nome-aluno">Nome do Aluno:</label>
+                        <input type="text" id="nome-aluno" required placeholder="Ex: João Silva">
+                    </div>
+
+                    <div class="campo">
+                        <label for="nota1">Nota 1:</label>
+                        <input type="number" id="nota1" min="0" max="20" step="0.1" required placeholder="0-20">
+                    </div>
+
+                    <div class="campo">
+                        <label for="nota2">Nota 2:</label>
+                        <input type="number" id="nota2" min="0" max="20" step="0.1" required placeholder="0-20">
+                    </div>
+
+                    <div class="campo">
+                        <label for="nota3">Nota 3:</label>
+                        <input type="number" id="nota3" min="0" max="20" step="0.1" required placeholder="0-20">
+                    </div>
+
+                    <button type="submit">Calcular Média</button>
+                </form>
+
+                <div id="resultado-media" class="resultado"></div>
+            </section>
         </main>
 
     </div>
@@ -40,3 +69,69 @@
     <script src="assets/js/script.js"></script>
 </body>
 </html>
+
+```javascript
+function calcularMedia(event) {
+    // Impede o formulário de recarregar a página ao clicar no botão
+    event.preventDefault(); 
+
+    // Captura os valores digitados nos inputs
+    const nome = document.getElementById('nome-aluno').value;
+    const n1 = parseFloat(document.getElementById('nota1').value);
+    const n2 = parseFloat(document.getElementById('nota2').value);
+    const n3 = parseFloat(document.getElementById('nota3').value);
+
+    // Calcula a média aritmética
+    const media = (n1 + n2 + n3) / 3;
+
+    // Define se o aluno está aprovado ou reprovado (ajusta a nota de corte se necessário, usei 10)
+    let situacao = media >= 10 ? "Aprovado" : "Reprovado";
+    
+    // Captura a div do resultado e exibe a mensagem
+    const divResultado = document.getElementById('resultado-media');
+    divResultado.innerHTML = `
+        <p><strong>Aluno:</strong> ${nome}</p>
+        <p><strong>Média Final:</strong> ${media.toFixed(2)} valores</p>
+        <p><strong>Situação:</strong> <span class="${situacao.toLowerCase()}">${situacao}</span></p>
+    `;
+}
+
+```css
+.calculadora-media {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Combina com o estilo transparente anterior */
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.campo {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.campo label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.campo input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.resultado {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Cores para o status de aprovação */
+.aprovado { color: #00ff88; font-weight: bold; }
+.reprovado { color: #ff4d4d; font-weight: bold; }
+
+```
